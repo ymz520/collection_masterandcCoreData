@@ -9,7 +9,9 @@
 #import "personViewController.h"
 #import <CoreData/CoreData.h>
 #import "Person.h"
+#import "Department.h"
 @interface personViewController ()
+
 @property(strong,nonatomic)NSManagedObjectContext *contexts;
 @end
 
@@ -46,23 +48,39 @@
 - (IBAction)add:(UIButton *)sender
 {
     
+//    Person *p1=[NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.contexts];
+//    int ages=[self.tage.text intValue];
+//    float heights=[self.theight.text floatValue];
+//    p1.name=self.tname.text;
+//    p1.age=@(ages);
+//    p1.height=@(heights);
+//    NSError *error=nil;
+//    [self.contexts save:&error];
+//    if (!error) {
+//        NSLog(@"success");
+//    }else
+//    {
+//        NSLog(@"%@",error);
+//
+//    
+//    }
+    
+    //向两张表插入数据
     Person *p1=[NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.contexts];
     int ages=[self.tage.text intValue];
-    float heights=[self.theight.text floatValue];
-    p1.name=self.tname.text;
-    p1.age=@(ages);
-    p1.height=@(heights);
-    NSError *error=nil;
-    [self.contexts save:&error];
-    if (!error) {
-        NSLog(@"success");
-    }else
-    {
-        NSLog(@"%@",error);
-
-    
-    }
-    
+        float heights=[self.theight.text floatValue];
+        p1.name=self.tname.text;
+        p1.age=@(ages);
+        p1.height=@(heights);
+    Department *de1=[NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.contexts];
+    int numid=[self.num.text intValue];
+    NSDate *dates=(NSDate *)self.date.text;
+    de1.departName=self.dename.text;
+    de1.departNum=@(numid);
+    de1.departDate=[NSDate date];
+    p1.depart=de1;
+    //
+    [self.contexts save:nil];
 }
 #pragma mark-修改
 - (IBAction)update:(UIButton *)sender
@@ -91,34 +109,41 @@
 #pragma mark-查询
 - (IBAction)select:(id)sender
 {
-    //创建请求对象（填入要查询到的表名（实体类））
-    NSFetchRequest *requests=[NSFetchRequest fetchRequestWithEntityName:@"Person"];
+//    //创建请求对象（填入要查询到的表名（实体类））
+//    NSFetchRequest *requests=[NSFetchRequest fetchRequestWithEntityName:@"Person"];
     NSError *error=nil;
-    //
-  
-    //过滤查询predicate(谓词)
-    NSPredicate *pre=[NSPredicate predicateWithFormat:@"name=%@",@"the"];
-//    requests.predicate=pre;
-    //排序
-    //创建排序对象
-    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"age" ascending:YES];
-    requests.sortDescriptors=@[sort];
-    //分页查询（9）每页显示3条limit(限制)，fetch（获取）
-    requests.fetchLimit=3;
-    requests.fetchOffset=3;
+//    //
+//    //过滤查询predicate(谓词)
+//    NSPredicate *pre=[NSPredicate predicateWithFormat:@"name=%@",@"the"];
+////    requests.predicate=pre;
+//    //排序
+//    //创建排序对象
+//    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"age" ascending:YES];
+//    requests.sortDescriptors=@[sort];
+//    //分页查询（9）每页显示3条limit(限制)，fetch（获取）
+//    requests.fetchLimit=3;
+//    requests.fetchOffset=3;
 //    requests.fetchBatchSize//获取批量大小
-    
+    //查找a部门的员工
+    NSFetchRequest *requests=[NSFetchRequest fetchRequestWithEntityName:@"Person"];
+    NSPredicate *predicates=[NSPredicate predicateWithFormat:@"depart.departName=%@",self.dename.text];
+    requests.predicate=predicates;
     
      NSArray *ar=[self.contexts executeFetchRequest:requests error:&error];
     if (!error) {
 //        NSLog(@"%@",ar);
         for (Person *p in ar) {
-            NSLog(@"%@ %@",p.name,p.age);
+            NSLog(@"%@ %@",p.name,p.depart.departName);
         }
     }else
     {
         NSLog(@"%@",error);
     }
     
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.dename resignFirstResponder];
+    [self.num resignFirstResponder];
 }
 @end

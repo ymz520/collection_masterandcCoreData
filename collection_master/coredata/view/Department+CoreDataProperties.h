@@ -1,5 +1,5 @@
 //
-//  Person+CoreDataProperties.h
+//  Department+CoreDataProperties.h
 //  collection_master
 //
 //  Created by 张 荣桂 on 16/6/2.
@@ -9,16 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Person.h"
+#import "Department.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Person (CoreDataProperties)
+@interface Department (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSNumber *age;
-@property (nullable, nonatomic, retain) NSNumber *height;
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) Department *depart;
+@property (nullable, nonatomic, retain) NSString *departName;
+@property (nullable, nonatomic, retain) NSNumber *departNum;
+@property (nullable, nonatomic, retain) NSDate *departDate;
 
 @end
 

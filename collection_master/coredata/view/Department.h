@@ -1,5 +1,5 @@
 //
-//  Person.h
+//  Department.h
 //  collection_master
 //
 //  Created by 张 荣桂 on 16/6/2.
@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Department;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Person : NSManagedObject
+@interface Department : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Person+CoreDataProperties.h"
+#import "Department+CoreDataProperties.h"

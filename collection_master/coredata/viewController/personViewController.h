@@ -18,5 +18,8 @@
 - (IBAction)deleteDatas:(id)sender;
 
 - (IBAction)select:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *dename;
+@property (weak, nonatomic) IBOutlet UITextField *num;
+@property (weak, nonatomic) IBOutlet UITextField *date;
 
 @end

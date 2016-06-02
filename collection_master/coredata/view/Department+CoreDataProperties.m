@@ -1,5 +1,5 @@
 //
-//  Person+CoreDataProperties.m
+//  Department+CoreDataProperties.m
 //  collection_master
 //
 //  Created by 张 荣桂 on 16/6/2.
@@ -9,13 +9,12 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Person+CoreDataProperties.h"
+#import "Department+CoreDataProperties.h"
 
-@implementation Person (CoreDataProperties)
+@implementation Department (CoreDataProperties)
 
-@dynamic age;
-@dynamic height;
-@dynamic name;
-@dynamic depart;
+@dynamic departName;
+@dynamic departNum;
+@dynamic departDate;
 
 @end
